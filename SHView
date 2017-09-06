@@ -1,0 +1,155 @@
+//
+//  SHView.swift
+//  SHView
+//
+//  Created by Shoaib Sarwar Cheema on 05/09/2017.
+//  Copyright © 2017. All rights reserved.
+//
+
+import UIKit
+
+class SHView: UIView {
+
+    fileprivate var isGone = false
+    fileprivate var heightBeforeGone : CGFloat = 0
+    fileprivate var topBeforeGone : CGFloat = 0
+    
+    //implimented in processing of notification
+    var gone:Bool {
+        
+        set(gone){
+            
+            if gone && !isGone{
+                heightBeforeGone = height
+                height = 0
+//                possition from top
+                topBeforeGone = top
+                top = 0
+            }
+            else if !gone{
+                height = heightBeforeGone
+                top = topBeforeGone
+            }
+            isGone = gone
+            
+            self.updateConstraintsIfNeeded()
+        }
+        get {
+            return isGone
+        }
+        
+    }
+    
+    fileprivate var constraintBased = false
+    //implimented in processing of notification
+  /*
+    fileprivate func setGone(_ setGone: Bool) {
+        
+        if isGone == setGone {
+            return
+        }
+        let constraints = self.constraints
+        var heightConstraint: NSLayoutConstraint? = nil
+        //        var topConstraint: NSLayoutConstraint? = nil
+        for constraint in constraints {
+            
+            if constraint.firstAttribute == .height {
+                heightConstraint = constraint
+                //                break
+            }
+        }
+        
+        if setGone {
+            //            topConstraint?.constant = 0
+            if (heightConstraint != nil) {
+                constraintBased = false
+            }
+            else {
+                constraintBased = true
+            }
+            
+            gone = true
+            
+        }
+        else {
+            //            topConstraint?.constant = 8
+            if (constraintBased && heightConstraint != nil) {
+                self.removeConstraint(heightConstraint!)
+            }
+            gone = false
+        }
+        
+    }
+*/
+    var top: CGFloat {
+        set(value) {
+            let constraints = self.constraints
+            
+            for constraint in constraints {
+                
+                if constraint.firstAttribute == .top {
+                    constraint.constant = value;
+                    
+                    return
+                }
+            }
+            
+            self.translatesAutoresizingMaskIntoConstraints = false
+            
+            var views: [String: AnyObject] = [:]
+            views["field"] = self
+            
+            let constVH = NSLayoutConstraint.constraints(withVisualFormat: "V:[field(\(top))]", options: [], metrics: nil, views: views)
+            
+            self.addConstraints(constVH)
+        }
+        get {
+            let constraints = self.constraints
+            
+            for constraint in constraints {
+                
+                if constraint.firstAttribute == .top {
+                    return constraint.constant
+                }
+            }
+            return 0
+        }
+    }
+    
+    var height:CGFloat {
+        
+        set(value){
+            let constraints = self.constraints
+            
+            for constraint in constraints {
+                
+                if constraint.firstAttribute == .height {
+                    constraint.constant = value;
+                    
+                    return
+                }
+            }
+            
+            self.translatesAutoresizingMaskIntoConstraints = false
+            
+            var views: [String: AnyObject] = [:]
+            views["field"] = self
+            
+            let constVH = NSLayoutConstraint.constraints(withVisualFormat: "V:[field(\(height))]", options: [], metrics: nil, views: views)
+            
+            self.addConstraints(constVH)
+        }
+        get {
+            let constraints = self.constraints
+            
+            for constraint in constraints {
+                
+                if constraint.firstAttribute == .height {
+                    return constraint.constant
+                }
+            }
+            return 0
+        }
+        
+    }
+}
