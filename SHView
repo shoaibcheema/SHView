@@ -41,46 +41,7 @@ class SHView: UIView {
     }
     
     fileprivate var constraintBased = false
-    //implimented in processing of notification
-  /*
-    fileprivate func setGone(_ setGone: Bool) {
-        
-        if isGone == setGone {
-            return
-        }
-        let constraints = self.constraints
-        var heightConstraint: NSLayoutConstraint? = nil
-        //        var topConstraint: NSLayoutConstraint? = nil
-        for constraint in constraints {
-            
-            if constraint.firstAttribute == .height {
-                heightConstraint = constraint
-                //                break
-            }
-        }
-        
-        if setGone {
-            //            topConstraint?.constant = 0
-            if (heightConstraint != nil) {
-                constraintBased = false
-            }
-            else {
-                constraintBased = true
-            }
-            
-            gone = true
-            
-        }
-        else {
-            //            topConstraint?.constant = 8
-            if (constraintBased && heightConstraint != nil) {
-                self.removeConstraint(heightConstraint!)
-            }
-            gone = false
-        }
-        
-    }
-*/
+    
     var top: CGFloat {
         set(value) {
             let constraints = self.constraints
