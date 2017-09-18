@@ -6,10 +6,11 @@
 //  Copyright © 2017. All rights reserved.
 //
 
+
 import UIKit
 
 class SHView: UIView {
-
+    
     fileprivate var isGone = false
     fileprivate var heightBeforeGone : CGFloat = 0
     fileprivate var topBeforeGone : CGFloat = 0
@@ -18,11 +19,11 @@ class SHView: UIView {
     var gone:Bool {
         
         set(gone){
-            
+            endEditing(true)
             if gone && !isGone{
                 heightBeforeGone = height
                 height = 0
-//                possition from top
+                //                possition from top
                 topBeforeGone = top
                 top = 0
             }
@@ -44,35 +45,29 @@ class SHView: UIView {
     
     var top: CGFloat {
         set(value) {
-            let constraints = self.constraints
-            
-            for constraint in constraints {
-                
-                if constraint.firstAttribute == .top {
-                    constraint.constant = value;
+            if let constraints = superview?.constraints {
+                for constraint in constraints {
                     
-                    return
+                    if (constraint.firstAttribute == .top && constraint.firstItem as! NSObject == self) || (constraint.secondAttribute == .top && constraint.secondItem as! NSObject == self) {
+                        constraint.constant = value;
+                        
+                        return
+                    }
                 }
             }
-            
-            self.translatesAutoresizingMaskIntoConstraints = false
-            
-            var views: [String: AnyObject] = [:]
-            views["field"] = self
-            
-            let constVH = NSLayoutConstraint.constraints(withVisualFormat: "V:[field(\(top))]", options: [], metrics: nil, views: views)
-            
-            self.addConstraints(constVH)
         }
         get {
-            let constraints = self.constraints
-            
-            for constraint in constraints {
-                
-                if constraint.firstAttribute == .top {
-                    return constraint.constant
+            if let constraints = superview?.constraints {
+                for constraint in constraints {
+                    
+                    if (constraint.firstAttribute == .top && constraint.firstItem as! NSObject == self) || (constraint.secondAttribute == .top && constraint.secondItem as! NSObject == self) {
+                        
+                        //                if constraint.firstAttribute == .top {
+                        return constraint.constant
+                    }
                 }
             }
+            
             return 0
         }
     }
