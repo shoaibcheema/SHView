@@ -50,6 +50,7 @@ class SHView: UIView {
             isGone = gone
             
             self.updateConstraintsIfNeeded()
+            self.isHidden = gone
         }
         get {
             return isGone
