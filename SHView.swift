@@ -35,6 +35,9 @@ class SHView: UIView {
     var gone:Bool {
         
         set(gone){
+            if gone == isGone {
+                return
+            }
             endEditing(true)
             if gone && !isGone{
                 heightBeforeGone = height
