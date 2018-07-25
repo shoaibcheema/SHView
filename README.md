@@ -11,7 +11,7 @@ SHView is a view with gone property.
 
 - Stroyboard Implementation
 
-  ![SHView in Storyboard](https://media.giphy.com/media/2sbOW1wPzXbpRVndHC/giphy.gif)
+  ![SHView in Storyboard](https://media.giphy.com/media/8FDi7REIjVFXg41H96/giphy.gif)
 
 
 - Simulator
