@@ -17,3 +17,25 @@ SHView is a view with gone property.
 - Simulator
   
   ![SHView in Simulator](https://media.giphy.com/media/tJMAGgkbRBcIBz9Rf1/giphy.gif)
+
+## Demo
+
+[Demo on Appetize.io](https://appetize.io/app/qvxzbzh55uzxwawpc63mrq0abg?device=iphone6s&scale=75&orientation=portrait&osVersion=11.4)
+
+![Preview](demo.gif)
+
+
+## Example
+
+```swift
+let myView = SHView()
+```
+add your constraints
+
+```swift
+myView.gone = true
+```
+or
+```swift
+myView.gone = false
+```

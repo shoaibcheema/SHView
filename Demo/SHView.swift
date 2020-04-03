@@ -35,6 +35,9 @@ class SHView: UIView {
     var gone:Bool {
         
         set(gone){
+            if gone == isGone {
+                return
+            }
             endEditing(true)
             if gone && !isGone{
                 heightBeforeGone = height
@@ -108,7 +111,7 @@ class SHView: UIView {
             var views: [String: AnyObject] = [:]
             views["field"] = self
             
-            let constVH = NSLayoutConstraint.constraints(withVisualFormat: "V:[field(\(height))]", options: [], metrics: nil, views: views)
+            let constVH = NSLayoutConstraint.constraints(withVisualFormat: "V:[field(\(value))]", options: [], metrics: nil, views: views)
             
             self.addConstraints(constVH)
         }
